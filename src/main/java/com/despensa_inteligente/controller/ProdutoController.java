@@ -26,7 +26,7 @@ public class ProdutoController implements Serializable{
 	
 	@Autowired private ProdutoService service;
 	     
-    @GetMapping("/")
+    @GetMapping("/produto")
     public ModelAndView findAll() {
          
         ModelAndView mv = new ModelAndView("/produto");
