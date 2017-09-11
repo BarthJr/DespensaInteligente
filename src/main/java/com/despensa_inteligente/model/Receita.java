@@ -1,8 +1,9 @@
 package com.despensa_inteligente.model;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 
 import lombok.EqualsAndHashCode;
 
@@ -14,8 +15,11 @@ public class Receita extends AbstractModel {
 
 	private String titulo;
 	private String modoPreparo;
-	private LocalDate tempoExecucao;
+	private LocalDateTime tempoExecucao;
 	private Long quantidade;
+	
+	@ManyToOne
+	private Cliente cliente;
 	
 	public String getTitulo() {
 		return titulo;
@@ -29,10 +33,10 @@ public class Receita extends AbstractModel {
 	public void setModoPreparo(String modoPreparo) {
 		this.modoPreparo = modoPreparo;
 	}
-	public LocalDate getTempoExecucao() {
+	public LocalDateTime getTempoExecucao() {
 		return tempoExecucao;
 	}
-	public void setTempoExecucao(LocalDate tempoExecucao) {
+	public void setTempoExecucao(LocalDateTime tempoExecucao) {
 		this.tempoExecucao = tempoExecucao;
 	}
 	public Long getQuantidade() {
