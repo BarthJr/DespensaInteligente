@@ -1,19 +1,34 @@
 	package com.despensa_inteligente.model;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @SuppressWarnings("serial")
 @Entity
-//@Data
+@Data
 @EqualsAndHashCode(callSuper = false)
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class Produto extends AbstractModel {
 
 	private String nome;
@@ -21,13 +36,11 @@ public class Produto extends AbstractModel {
 	private String tipo;
 	private Double peso;
 	
-//	@ManyToMany(cascade={CascadeType.MERGE, CascadeType.PERSIST})
-	@ManyToMany
-//	@JoinTable(name="Produto_Despensa",
-//			   joinColumns = @JoinColumn(name = "produto_id"),
-//			   inverseJoinColumns = @JoinColumn(name = "despensa_id"))
-	private List<Despensa> despensas =  new ArrayList<>();
-	
+	@ManyToMany(cascade = {CascadeType.MERGE})
+	@JsonIgnoreProperties("produtos")  
+	private List<Despensa> despensas = new ArrayList<>();
+//	private Set<Despensa> despensas =  new HashSet<>();
+//	private Set<Despensa> despensas;
 	
 	@ManyToOne
 	@JoinColumn(nullable = false)
@@ -36,42 +49,6 @@ public class Produto extends AbstractModel {
 	@ManyToOne
 	private Categoria categoria;
 	
-	public String getNome() {
-		return nome;
-	}
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-	public String getMarca() {
-		return marca;
-	}
-	public void setMarca(String marca) {
-		this.marca = marca;
-	}
-	public String getTipo() {
-		return tipo;
-	}
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
-	}
-	public Double getPeso() {
-		return peso;
-	}
-	public void setPeso(Double peso) {
-		this.peso = peso;
-	}
-	public List<Despensa> getDespensas() {
-		return despensas;
-	}
-	public void setDespensas(List<Despensa> despensas) {
-		this.despensas = despensas;
-	}
-	public Cliente getCliente() {
-		return cliente;
-	}
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
-	}
 	
 	
 }

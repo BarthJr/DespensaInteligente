@@ -2,23 +2,17 @@ package com.despensa_inteligente.model;
 
 import javax.persistence.Entity;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
+import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @SuppressWarnings("serial")
 @Entity
-//@Data
+@Data
 @EqualsAndHashCode(callSuper = false)
 public class Categoria extends AbstractModel {
-
+	@NotEmpty(message = "O campo nome da categoria é obrigatório")
 	private String nome;
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
 	
-
 }

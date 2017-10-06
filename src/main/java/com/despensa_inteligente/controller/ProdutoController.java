@@ -78,20 +78,21 @@ public class ProdutoController implements Serializable{
 // REST SERVICE    
     
     @GetMapping("/produtos/{id}")
-	public ResponseEntity<Produto> buscar(@PathVariable("id") Long id) {
+	public ResponseEntity<?> buscar(@PathVariable("id") Long id) {
     	verifyIfProdutoExists(id);
 		Produto produto = repository.findOne(id);
-		return new ResponseEntity<Produto>(produto,HttpStatus.OK);
+		return new ResponseEntity<>(produto,HttpStatus.OK);
 	}
     
     @GetMapping(value="/produtos")
-    public ResponseEntity<List<Produto>> buscaProdutoPorNome(@RequestParam("nome") Optional<String> nome) {
-    	List<Produto> produto = (nome.isPresent()) ? (List<Produto>) repository.findByNomeIgnoreCaseContaining(nome) : (List<Produto>) repository.findAll();
+    public ResponseEntity<List<?>> buscaProdutoPorNome(@RequestParam("nome") Optional<String> nome) {
+    	List<?> produto = (nome.isPresent()) ? (List<?>) repository.findByNomeIgnoreCaseContaining(nome) : (List<?>) repository.findAll();
 //        return new ResponseEntity<>(repository.findByNome(nome), HttpStatus.OK);
     	if(produto == null) {
+    		
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-        return new ResponseEntity<List<Produto>>(produto,HttpStatus.OK);
+        return new ResponseEntity<List<?>>(produto,HttpStatus.OK);
     }
     
     @PostMapping(value="/produtos")
