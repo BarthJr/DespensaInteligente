@@ -6,28 +6,19 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
+import org.hibernate.annotations.GenericGenerator;
+
+import lombok.Data;
+import lombok.ToString;
+
 @SuppressWarnings("serial")
 @MappedSuperclass
-//@Data
+@Data
+@ToString
 public class AbstractModel implements Serializable {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(generator = "increment")
+	@GenericGenerator(name = "increment", strategy = "increment")
 	private Long id;
-	
-	public Long getId() {
-		return id;
-	}
-
-
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	@Override
-	public String toString() {
-	    return String.format("%s[id=%d]", getClass().getSimpleName(), getId());
-	}
-
 	
 }
