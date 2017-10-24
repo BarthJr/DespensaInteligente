@@ -1,20 +1,13 @@
 	package com.despensa_inteligente.model;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -29,6 +22,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Produto extends AbstractModel {
 
 	private String nome;
@@ -36,19 +30,36 @@ public class Produto extends AbstractModel {
 	private String tipo;
 	private Double peso;
 	
-	@ManyToMany(cascade = {CascadeType.MERGE})
-	@JsonIgnoreProperties("produtos")  
-	private List<Despensa> despensas = new ArrayList<>();
-//	private Set<Despensa> despensas =  new HashSet<>();
-//	private Set<Despensa> despensas;
 	
+	
+	
+	public Produto(String nome, String marca, String tipo, Double peso) {
+		super();
+		this.nome = nome;
+		this.marca = marca;
+		this.tipo = tipo;
+		this.peso = peso;
+	}
+
 	@ManyToOne
 	@JoinColumn(nullable = false)
+//	@JsonIgnore
 	private Cliente cliente;
 	
 	@ManyToOne
+//	@JsonIgnore
 	private Categoria categoria;
 	
+//	@OneToMany(mappedBy = "produto", cascade = CascadeType.ALL, orphanRemoval = false,
+//			fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "produto")
+	@JsonIgnoreProperties("produto")
+	private List<ProdutoDespensa> produtosDespensas;
 	
+//	@OneToMany(mappedBy = "receita", cascade = CascadeType.ALL, orphanRemoval = false,
+//			fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "produto")
+	@JsonIgnoreProperties("produto")
+	private List<ProdutoReceita> produtosReceitas;
 	
 }
