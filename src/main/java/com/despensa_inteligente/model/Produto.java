@@ -7,6 +7,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
@@ -43,7 +44,7 @@ public class Produto extends AbstractModel {
 
 	@ManyToOne
 	@JoinColumn(nullable = false)
-//	@JsonIgnore
+	@JsonIgnore
 	private Cliente cliente;
 	
 	@ManyToOne
@@ -53,13 +54,15 @@ public class Produto extends AbstractModel {
 //	@OneToMany(mappedBy = "produto", cascade = CascadeType.ALL, orphanRemoval = false,
 //			fetch = FetchType.LAZY)
 	@OneToMany(mappedBy = "produto")
-	@JsonIgnoreProperties("produto")
+//	@JsonIgnoreProperties("produto")
+	@JsonIgnore
 	private List<ProdutoDespensa> produtosDespensas;
 	
 //	@OneToMany(mappedBy = "receita", cascade = CascadeType.ALL, orphanRemoval = false,
 //			fetch = FetchType.LAZY)
 	@OneToMany(mappedBy = "produto")
 	@JsonIgnoreProperties("produto")
+	@JsonIgnore
 	private List<ProdutoReceita> produtosReceitas;
 	
 }
