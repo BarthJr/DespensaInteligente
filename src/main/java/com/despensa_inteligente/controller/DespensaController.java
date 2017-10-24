@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.despensa_inteligente.model.Cliente;
 import com.despensa_inteligente.model.Despensa;
+import com.despensa_inteligente.repository.ClienteRepository;
 import com.despensa_inteligente.repository.DespensaRepository;
 
 @SuppressWarnings("serial")
@@ -27,6 +29,7 @@ import com.despensa_inteligente.repository.DespensaRepository;
 public class DespensaController implements Serializable {
 	
 	@Autowired private DespensaRepository repository;
+	@Autowired private ClienteRepository clienteRepository;
 	     
     @GetMapping("/{id}")
 	public ResponseEntity<Despensa> buscar(@PathVariable("id") Long id) {
@@ -44,6 +47,16 @@ public class DespensaController implements Serializable {
 		}
         return new ResponseEntity<List<Despensa>>(despensa,HttpStatus.OK);
     }
+    
+    @GetMapping(value="/cliente/{id}")
+	public ResponseEntity<List<Despensa>> buscaDespensaPorCliente(@PathVariable("id") Long id) {
+    	Cliente cliente = clienteRepository.findOne(id);
+    	List<Despensa> despensa = (List<Despensa>) repository.findByCliente(cliente);
+  	if(despensa == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+      return new ResponseEntity<List<Despensa>>(despensa,HttpStatus.OK);
+	}
     
     @PostMapping
     public ResponseEntity<?> save(@RequestBody Despensa despensa) {
