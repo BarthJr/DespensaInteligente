@@ -6,7 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,17 +21,14 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
 @AllArgsConstructor
-//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Despensa extends AbstractModel {
 
 	private String nome;
 	private String localizacao;
 
-//	@OneToMany(mappedBy = "despensa", cascade = CascadeType.ALL, orphanRemoval = false,
-//			   fetch = FetchType.LAZY)
 	@OneToMany(mappedBy = "despensa")
 	@JsonIgnoreProperties("despensa")
-//	@JsonBackReference
 	private List<ProdutoDespensa> produtosDespensas;
 	
 	@ManyToOne
