@@ -4,13 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.despensa_inteligente.serializers.ReceitaSerializer;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,7 +22,7 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@JsonSerialize(using = ReceitaSerializer.class)
 public class Receita extends AbstractModel {
 
 	private String titulo;
@@ -34,16 +33,11 @@ public class Receita extends AbstractModel {
 	@ManyToOne
 	private Cliente cliente;
 	
-//	@OneToMany(mappedBy = "receita", cascade = CascadeType.ALL, orphanRemoval = false,
-//			fetch = FetchType.LAZY)
-//	@JsonIgnoreProperties("produtos")
 	@OneToMany(mappedBy = "receita")
 	@JsonIgnoreProperties("receita")
 	private List<ProdutoReceita> produtosReceitas = new ArrayList<>();
 	
-	@ManyToMany(mappedBy = "receitasFavoritas")
-//	@JsonIgnoreProperties("receitasFavoritas")
-//	@JsonIgnore
-	private List<Cliente> FavoritadasPelosClientes;
+	@OneToMany(mappedBy = "receita")
+	private List<Favorita> favoritadasPelosClientes;
 	
 }
