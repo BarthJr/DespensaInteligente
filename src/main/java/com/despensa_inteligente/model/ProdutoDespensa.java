@@ -1,9 +1,13 @@
 	package com.despensa_inteligente.model;
 
+import java.time.LocalDate;
+
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
+import com.despensa_inteligente.serializers.LocalDateSerializer;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,18 +31,15 @@ public class ProdutoDespensa extends AbstractModel {
 		this.quantidade = quantidade;
 	}
 	@ManyToOne
-//	@JsonIgnore
-//	@JsonManagedReference
 	@JsonIgnoreProperties("produtosDespensas")
 	private Produto produto;
 	
 	@ManyToOne
-//	@JsonIgnore
-//	@JsonManagedReference
 	@JsonIgnoreProperties("produtosDespensas")
 	private Despensa despensa;
 
-//	private LocalDateTime validade;
+	@JsonSerialize(using = LocalDateSerializer.class)
+	private LocalDate validade;
 	private Double quantidade;
 	
 	
