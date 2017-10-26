@@ -78,7 +78,7 @@ public class DespensaController implements Serializable {
     
     private void verifyIfProdutoExists(Long id) {
     	if(repository.findOne(id) == null)
-    		throw new ResourceNotFoundException("Produto não encontrado para o ID "+id);
+    		throw new ResourceNotFoundException("Despensa não encontrada para o ID "+id);
     }
 	
 }

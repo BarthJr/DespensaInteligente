@@ -79,7 +79,7 @@ public class ReceitaController implements Serializable {
     
     private void verifyIfProdutoExists(Long id) {
     	if(repository.findOne(id) == null)
-    		throw new ResourceNotFoundException("Produto não encontrado para o ID "+id);
+    		throw new ResourceNotFoundException("Receita não encontrada para o ID "+id);
     }
 	
 }

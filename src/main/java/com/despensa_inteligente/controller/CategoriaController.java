@@ -1,8 +1,6 @@
 package com.despensa_inteligente.controller;
 
 import java.io.Serializable;
-import java.util.List;
-import java.util.Optional;
 
 import javax.management.RuntimeErrorException;
 import javax.validation.Valid;
@@ -19,7 +17,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.despensa_inteligente.model.Categoria;
@@ -79,7 +76,7 @@ public class CategoriaController implements Serializable {
     
     private void verifyIfProdutoExists(Long id) {
     	if(repository.findOne(id) == null)
-    		throw new ResourceNotFoundException("Produto não encontrado para o ID "+id);
+    		throw new ResourceNotFoundException("Categoria não encontrada para o ID "+id);
     }
 	
 }

@@ -1,14 +1,11 @@
 package com.despensa_inteligente.controller;
 
 import java.io.Serializable;
-import java.util.List;
-import java.util.Optional;
 
 import javax.management.RuntimeErrorException;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +16,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.despensa_inteligente.model.ProdutoDespensa;
@@ -79,7 +75,7 @@ public class ProdutoDespensaController implements Serializable {
     
     private void verifyIfProdutoExists(Long id) {
     	if(repository.findOne(id) == null)
-    		throw new ResourceNotFoundException("Produto não encontrado para o ID "+id);
+    		throw new ResourceNotFoundException("ProdutoDespensa não encontrado para o ID "+id);
     }
 	
 }
