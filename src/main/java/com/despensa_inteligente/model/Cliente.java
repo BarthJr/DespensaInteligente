@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
@@ -16,10 +17,9 @@ import lombok.NoArgsConstructor;
 @SuppressWarnings("serial")
 @Entity
 @Data
-@EqualsAndHashCode(callSuper = 	false)
+@EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
-@AllArgsConstructor
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Cliente extends AbstractModel {
 
 	private String nome;
@@ -28,4 +28,24 @@ public class Cliente extends AbstractModel {
 	
 	@OneToMany(mappedBy = "cliente")
 	private List<Favorita> receitasFavoritas;
+
+	public Cliente(Long id, String nome, String login, String senha){
+		super(id);
+		this.nome = nome;
+		this.login = login;
+		this.senha = senha;
+
+	}
+
+	public Cliente(String nome, String login, String senha){
+		super();
+		this.nome = nome;
+		this.login = login;
+		this.senha = senha;
+
+	}
+
+	public Cliente(Long id){
+		super(id);
+	}
 }
