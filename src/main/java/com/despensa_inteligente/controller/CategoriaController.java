@@ -46,18 +46,12 @@ public class CategoriaController implements Serializable {
 //    }
     
     @GetMapping
-    public ResponseEntity<?> buscaCategoria(Pageable pageable) {
-        return new ResponseEntity<>(repository.findAll(pageable), HttpStatus.OK);
+    public ResponseEntity<?> buscaCategoria() {
+        return new ResponseEntity<>(repository.findAll(), HttpStatus.OK);
     }
     
     @PostMapping
     public ResponseEntity<?> save(@Valid @RequestBody Categoria categoria) {
-    	repository.save(categoria);
-    	categoria.setId(null);
-    	repository.save(categoria);
-    	if(true)
-    		throw new RuntimeErrorException(null, "Test");
-    	repository.save(categoria);
     	return new ResponseEntity<>(repository.save(categoria), HttpStatus.CREATED);
     }
     

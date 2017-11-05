@@ -14,9 +14,23 @@ import lombok.NoArgsConstructor;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
-@AllArgsConstructor
 public class Categoria extends AbstractModel {
-	@NotEmpty(message = "O campo nome da categoria é obrigatório")
+//	@NotEmpty(message = "O campo nome da categoria é obrigatório")
 	private String nome;
+
+	public Categoria(Long id, String nome){
+		super(id);
+		this.nome = nome;
+	}
+
+	public Categoria(String nome){
+		super();
+		this.nome = nome;
+	}
+
+	public Categoria(Long id){
+		super(id);
+	}
+	
 	
 }
