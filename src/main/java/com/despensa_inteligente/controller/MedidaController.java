@@ -52,12 +52,6 @@ public class MedidaController implements Serializable {
     
     @PostMapping
     public ResponseEntity<?> save(@Valid @RequestBody Medida medida) {
-    	repository.save(medida);
-    	medida.setId(null);
-    	repository.save(medida);
-    	if(true)
-    		throw new RuntimeErrorException(null, "Test");
-    	repository.save(medida);
     	return new ResponseEntity<>(repository.save(medida), HttpStatus.CREATED);
     }
     
