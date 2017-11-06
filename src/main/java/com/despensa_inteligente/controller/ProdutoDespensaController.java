@@ -50,13 +50,7 @@ public class ProdutoDespensaController implements Serializable {
     }
     
     @PostMapping
-    public ResponseEntity<?> save(@Valid @RequestBody ProdutoDespensa produtoDespensa) {
-    	repository.save(produtoDespensa);
-    	produtoDespensa.setId(null);
-    	repository.save(produtoDespensa);
-    	if(true)
-    		throw new RuntimeErrorException(null, "Test");
-    	repository.save(produtoDespensa);
+    public ResponseEntity<?> save(@RequestBody ProdutoDespensa produtoDespensa) {
     	return new ResponseEntity<>(repository.save(produtoDespensa), HttpStatus.CREATED);
     }
     

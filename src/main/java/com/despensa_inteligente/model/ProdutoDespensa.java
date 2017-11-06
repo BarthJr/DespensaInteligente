@@ -1,48 +1,66 @@
 	package com.despensa_inteligente.model;
 
-import java.time.LocalDate;
+	import com.despensa_inteligente.serializers.*;
+    import com.fasterxml.jackson.annotation.*;
+    import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+    import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+	import lombok.*;
+	import org.apache.tomcat.jni.Local;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-
-import com.despensa_inteligente.serializers.LocalDateSerializer;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+	import javax.persistence.Entity;
+	import javax.persistence.ManyToOne;
+	import java.time.LocalDate;
 
 @SuppressWarnings("serial")
 @Entity
 @Data
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
-@AllArgsConstructor
 @ToString
 public class ProdutoDespensa extends AbstractModel {
-	
-	
-	
-	public ProdutoDespensa(Double quantidade) {
-		super();
-		this.quantidade = quantidade;
-	}
+
 	@ManyToOne
-	@JsonIgnoreProperties("produtosDespensas")
+//	@JsonIgnoreProperties("produtosDespensas")
+    @JsonSerialize(using = ProdutoSerializer.class)
 	private Produto produto;
 	
 	@ManyToOne
-	@JsonIgnoreProperties("produtosDespensas")
+//	@JsonIgnoreProperties("produtosDespensas")
+    @JsonSerialize(using = DespensaSerializer1.class)
 	private Despensa despensa;
 
-	@JsonSerialize(using = LocalDateSerializer.class)
-	private LocalDate validade;
-	private Double quantidade;
-	
-	
-	
-	
+    @JsonSerialize(using = LocalDateSerializer.class)
+    private LocalDate validade;
+    private Double quantidade;
+
+    //Constructor GET
+    public ProdutoDespensa(Long id, Long idProduto, Long idDespensa, Double quantidade){
+        super(id);
+
+        Produto produto = new Produto(idProduto);
+        Despensa despensa = new Despensa(idDespensa);
+
+        this.produto = produto;
+        this.despensa = despensa;
+        this.quantidade = quantidade;
+    }
+
+    //Constructor POST
+    public ProdutoDespensa(Long idProduto, Long idDespensa, Double quantidade){
+        super();
+
+        Produto produto = new Produto(idProduto);
+        Despensa despensa = new Despensa(idDespensa);
+
+        this.produto = produto;
+        this.despensa = despensa;
+        this.quantidade = quantidade;
+    }
+
+
+	public ProdutoDespensa(Long id){
+		super(id);
+	}
+
+
 }
