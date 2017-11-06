@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.apache.commons.compress.archivers.sevenz.CLI;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -21,10 +22,7 @@ import java.util.List;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
-//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-//@JsonSerialize(using = DespensaSerializer.class)
 //@JsonIgnoreProperties(ignoreUnknown = true)
-//@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Despensa extends AbstractModel {
 
 	private String nome;
@@ -35,71 +33,29 @@ public class Despensa extends AbstractModel {
 	private List<ProdutoDespensa> produtosDespensas;
 	
 	@ManyToOne
-//	@JsonSerialize(using = ClienteSerializer2.class)
-//    @JsonDeserialize(using = ClienteDeserializer.class)
-//    @JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
-//    @JsonIdentityReference(alwaysAsId=true)
 	private Cliente cliente;
 	
-	public Despensa(Long id, String nome, String localizacao) {
-		super(id);
-		this.nome = nome;
-		this.localizacao = localizacao;
-	}
-
-    public Despensa(String nome, String localizacao) {
-        super();
-        this.nome = nome;
-        this.localizacao = localizacao;
-    }
-
-//	@JsonCreator
-//    public Despensa(@JsonProperty("nome")String nome, @JsonProperty("localizacao")String localizacao, @JsonProperty("cliente")Long idCliente) {
-//        super();
-//        this.nome = nome;
-//        this.localizacao = localizacao;
-//        Cliente cliente = new Cliente(idCliente);
-//        this.cliente = cliente;
-//    }
-
-    public Despensa(Long id, String nome, String localizacao, Cliente cliente, List<ProdutoDespensa> produtosDespensas){
+    //Constructor GET
+    public Despensa(Long id, String nome, String localizacao, Long idCliente){
         super(id);
-        this.nome = nome;
-        this.localizacao = localizacao;
-        this.cliente = cliente;
-        this.produtosDespensas = produtosDespensas;
-    }
-
-    public Despensa(Long id, String nome, String localizacao, Cliente cliente){
-        super(id);
+        Cliente cliente = new Cliente(idCliente);
         this.nome = nome;
         this.localizacao = localizacao;
         this.cliente = cliente;
     }
 
-    public Despensa(String nome, String localizacao, Cliente cliente) {
+    //Constructor POST
+    public Despensa(String nome, String localizacao, Long idCliente){
         super();
+        Cliente cliente = new Cliente(idCliente);
         this.nome = nome;
         this.localizacao = localizacao;
         this.cliente = cliente;
     }
-
-    public Despensa(Cliente cliente) {
-        super();
-        this.cliente = cliente;
-    }
-
-
-
-
 
 
     public Despensa(Long id) {
 	    super(id);
     }
-
-
-
-
 
 }

@@ -36,15 +36,14 @@ public class DespensaEndpointTest extends DespensaInteligenteApplicationTests {
 
     @Before
     public void setUp() throws Exception {
-        cliente = new Cliente(1L);
-        despensa = new Despensa(1L, "Ap", "Floripa", cliente);
+        despensa = new Despensa(1L, "Ap", "Floripa", 1L);
         BDDMockito.when(despensaRepository.findOne(despensa.getId())).thenReturn(despensa);
     }
 
     @Test
     public void lista_despensas(){
         List<Despensa> despensas = asList(despensa,
-                new Despensa(2L,"Casa", "Rio")
+                new Despensa(2L,"Casa", "Rio", 2L)
         );
         BDDMockito.when(despensaRepository.findAll()).thenReturn(despensas);
         ResponseEntity<String> response = restTemplate.getForEntity("/despensas", String.class);
@@ -60,7 +59,7 @@ public class DespensaEndpointTest extends DespensaInteligenteApplicationTests {
 
     @Test
     public void salva_despensa(){
-        Despensa despensa = new Despensa("nomeDespensa", "Vancouver", cliente);
+        Despensa despensa = new Despensa("nomeDespensa", "Vancouver", 1L);
         BDDMockito.when(despensaRepository.save(despensa)).thenReturn(despensa);
         ResponseEntity<String> response = restTemplate.postForEntity("/despensas", despensa, String.class);
         Assertions.assertThat(response.getStatusCodeValue()).isEqualTo(201);
