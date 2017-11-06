@@ -23,16 +23,6 @@ public class ProdutoSerializer extends StdSerializer<Produto> {
       JsonGenerator generator, 
       SerializerProvider provider) 
       throws IOException, JsonProcessingException {
-         
-//    	generator.writeStartObject();
-//        generator.writeNumberField("id", produto.getId());
-//        generator.writeStringField("nome", produto.getNome());
-//        generator.writeStringField("marca", produto.getMarca());
-//        generator.writeStringField("tipo", produto.getTipo());
-//        generator.writeNumberField("peso", produto.getPeso());
-//        generator.writeNumberField("categoria", produto.getCategoria().getId());
-//        generator.writeEndObject();
-
         generator.writeNumber(produto.getId());
     }
 
