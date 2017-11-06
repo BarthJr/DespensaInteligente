@@ -1,21 +1,16 @@
 package com.despensa_inteligente.model;
 
-import com.despensa_inteligente.serializers.ClienteSerializer2;
 import com.despensa_inteligente.serializers.ProdutoDespensaSerializer;
-import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import org.apache.commons.compress.archivers.sevenz.CLI;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import java.util.List;
 
-//import com.despensa_inteligente.serializers.ClienteDeserializer;
 
 @SuppressWarnings("serial")
 @Entity
