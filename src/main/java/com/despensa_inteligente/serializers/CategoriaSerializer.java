@@ -23,16 +23,6 @@ public class CategoriaSerializer extends StdSerializer<Categoria> {
       JsonGenerator generator, 
       SerializerProvider provider) 
       throws IOException, JsonProcessingException {
-         
-//    	generator.writeStartObject();
-//        generator.writeNumberField("id", categoria.getId());
-//        generator.writeStringField("nome", categoria.getNome());
-//        generator.writeStringField("marca", categoria.getMarca());
-//        generator.writeStringField("tipo", categoria.getTipo());
-//        generator.writeNumberField("peso", categoria.getPeso());
-//        generator.writeNumberField("categoria", categoria.getCategoria().getId());
-//        generator.writeEndObject();
-
         generator.writeNumber(categoria.getId());
     }
 
