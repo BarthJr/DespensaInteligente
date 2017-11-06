@@ -55,12 +55,6 @@ public class ReceitaController implements Serializable {
     
     @PostMapping
     public ResponseEntity<?> save(@Valid @RequestBody Receita receita) {
-    	repository.save(receita);
-    	receita.setId(null);
-    	repository.save(receita);
-    	if(true)
-    		throw new RuntimeErrorException(null, "Test");
-    	repository.save(receita);
     	return new ResponseEntity<>(repository.save(receita), HttpStatus.CREATED);
     }
     
