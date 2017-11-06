@@ -19,7 +19,6 @@ import lombok.NoArgsConstructor;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
-//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Cliente extends AbstractModel {
 
 	private String nome;
@@ -29,6 +28,8 @@ public class Cliente extends AbstractModel {
 	@OneToMany(mappedBy = "cliente")
 	private List<Favorita> receitasFavoritas;
 
+
+	//Constructor GET
 	public Cliente(Long id, String nome, String login, String senha){
 		super(id);
 		this.nome = nome;
@@ -37,6 +38,7 @@ public class Cliente extends AbstractModel {
 
 	}
 
+	//Constructor POST
 	public Cliente(String nome, String login, String senha){
 		super();
 		this.nome = nome;
