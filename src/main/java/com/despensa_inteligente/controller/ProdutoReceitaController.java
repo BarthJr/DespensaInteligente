@@ -51,12 +51,6 @@ public class ProdutoReceitaController implements Serializable {
     
     @PostMapping
     public ResponseEntity<?> save(@Valid @RequestBody ProdutoReceita produtoReceita) {
-    	repository.save(produtoReceita);
-    	produtoReceita.setId(null);
-    	repository.save(produtoReceita);
-    	if(true)
-    		throw new RuntimeErrorException(null, "Test");
-    	repository.save(produtoReceita);
     	return new ResponseEntity<>(repository.save(produtoReceita), HttpStatus.CREATED);
     }
     
