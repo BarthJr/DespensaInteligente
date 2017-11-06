@@ -18,11 +18,14 @@ public class Categoria extends AbstractModel {
 //	@NotEmpty(message = "O campo nome da categoria é obrigatório")
 	private String nome;
 
+	//Constructor GET
 	public Categoria(Long id, String nome){
 		super(id);
 		this.nome = nome;
 	}
 
+
+	//Constructor POST
 	public Categoria(String nome){
 		super();
 		this.nome = nome;
