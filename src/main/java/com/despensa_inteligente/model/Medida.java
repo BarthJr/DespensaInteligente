@@ -18,6 +18,7 @@ public class Medida extends AbstractModel {
 	private String nome;
 	private Double valor;
 
+	//Contrutor para GET
 	public Medida(Long id, String nome, Double valor) {
 		super(id);
 		this.nome = nome;
@@ -25,6 +26,7 @@ public class Medida extends AbstractModel {
 
 	}
 
+	//Contrutor para POST
 	public Medida(String nome, Double valor) {
 		super();
 		this.nome = nome;
