@@ -1,13 +1,10 @@
 	package com.despensa_inteligente.model;
 
 	import com.despensa_inteligente.serializers.*;
-    import com.fasterxml.jackson.annotation.*;
-    import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
     import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 	import lombok.*;
-	import org.apache.tomcat.jni.Local;
 
-	import javax.persistence.Entity;
+    import javax.persistence.Entity;
 	import javax.persistence.ManyToOne;
 	import java.time.LocalDate;
 
@@ -26,7 +23,7 @@ public class ProdutoDespensa extends AbstractModel {
 	
 	@ManyToOne
 //	@JsonIgnoreProperties("produtosDespensas")
-    @JsonSerialize(using = DespensaSerializer1.class)
+    @JsonSerialize(using = DespensaSerializer.class)
 	private Despensa despensa;
 
     @JsonSerialize(using = LocalDateSerializer.class)
