@@ -1,8 +1,6 @@
 package com.despensa_inteligente.serializers;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import com.despensa_inteligente.model.Produto;
 import com.fasterxml.jackson.core.JsonGenerator;
@@ -26,14 +24,16 @@ public class ProdutoSerializer extends StdSerializer<Produto> {
       SerializerProvider provider) 
       throws IOException, JsonProcessingException {
          
-    	generator.writeStartObject();
-        generator.writeNumberField("id", produto.getId());
-        generator.writeStringField("nome", produto.getNome());
-        generator.writeStringField("marca", produto.getMarca());
-        generator.writeStringField("tipo", produto.getTipo());
-        generator.writeNumberField("peso", produto.getPeso());
-        generator.writeNumberField("categoria", produto.getCategoria().getId());
-        generator.writeEndObject();
+//    	generator.writeStartObject();
+//        generator.writeNumberField("id", produto.getId());
+//        generator.writeStringField("nome", produto.getNome());
+//        generator.writeStringField("marca", produto.getMarca());
+//        generator.writeStringField("tipo", produto.getTipo());
+//        generator.writeNumberField("peso", produto.getPeso());
+//        generator.writeNumberField("categoria", produto.getCategoria().getId());
+//        generator.writeEndObject();
+
+        generator.writeNumber(produto.getId());
     }
 
 }
