@@ -1,5 +1,6 @@
 package com.despensa_inteligente.model;
 
+import com.despensa_inteligente.serializers.ClienteSerializer;
 import com.despensa_inteligente.serializers.ProdutoDespensaSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Data;
@@ -28,6 +29,7 @@ public class Despensa extends AbstractModel {
 	private List<ProdutoDespensa> produtosDespensas;
 	
 	@ManyToOne
+    @JsonSerialize(using = ClienteSerializer.class)
 	private Cliente cliente;
 	
     //Constructor GET
