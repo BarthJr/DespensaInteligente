@@ -1,6 +1,7 @@
 	package com.despensa_inteligente.model;
 
 	import com.despensa_inteligente.serializers.*;
+    import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
     import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 	import lombok.*;
 
@@ -27,6 +28,7 @@ public class ProdutoDespensa extends AbstractModel {
 	private Despensa despensa;
 
     @JsonSerialize(using = LocalDateSerializer.class)
+    @JsonDeserialize(using = LocalDateDeserializer.class)
     private LocalDate validade;
     private Double quantidade;
 
