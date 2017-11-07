@@ -23,6 +23,7 @@ public class ProdutoDespensaSerializer extends JsonSerializer<List<ProdutoDespen
     		generator.writeStartObject();
     		generator.writeNumberField("id", produtoDespensa.getId());
     		generator.writeNumberField("quantidade", produtoDespensa.getQuantidade());
+    		generator.writeStringField("validade", produtoDespensa.getValidade().toString());
     		generator.writeEndObject();
     	}
         generator.writeEndArray();
