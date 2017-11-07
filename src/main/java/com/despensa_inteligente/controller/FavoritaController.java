@@ -52,12 +52,6 @@ public class FavoritaController implements Serializable {
     
     @PostMapping
     public ResponseEntity<?> save(@Valid @RequestBody Favorita favorita) {
-    	repository.save(favorita);
-    	favorita.setId(null);
-    	repository.save(favorita);
-    	if(true)
-    		throw new RuntimeErrorException(null, "Test");
-    	repository.save(favorita);
     	return new ResponseEntity<>(repository.save(favorita), HttpStatus.CREATED);
     }
     

@@ -3,8 +3,12 @@
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
+import com.despensa_inteligente.serializers.CategoriaSerializer;
+import com.despensa_inteligente.serializers.ClienteSerializer;
+import com.despensa_inteligente.serializers.ReceitaSerializer;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -19,14 +23,15 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class Favorita extends AbstractModel {
-	
-	
+
 	@ManyToOne
-	@JsonIgnoreProperties("receitasFavoritas")
+//	@JsonIgnoreProperties("receitasFavoritas")
+	@JsonSerialize(using = ClienteSerializer.class)
 	private Cliente cliente;
 	
 	@ManyToOne
-	@JsonIgnoreProperties("favoritadasPelosClientes")
+//	@JsonIgnoreProperties("favoritadasPelosClientes")
+	@JsonSerialize(using = ReceitaSerializer.class)
 	private Receita receita;
 
 }
