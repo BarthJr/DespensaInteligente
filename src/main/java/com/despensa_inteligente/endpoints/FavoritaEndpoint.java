@@ -1,10 +1,7 @@
-package com.despensa_inteligente.controller;
+package com.despensa_inteligente.endpoints;
 
 import java.io.Serializable;
-import java.util.List;
-import java.util.Optional;
 
-import javax.management.RuntimeErrorException;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,49 +16,48 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.despensa_inteligente.model.Receita;
-import com.despensa_inteligente.repository.ReceitaRepository;
+import com.despensa_inteligente.model.Favorita;
+import com.despensa_inteligente.repository.FavoritaRepository;
 
 @SuppressWarnings("serial")
 @RestController
-@RequestMapping("/receitas")
-public class ReceitaController implements Serializable {
+@RequestMapping("/favoritas")
+public class FavoritaEndpoint implements Serializable {
 	
-	@Autowired private ReceitaRepository repository;
+	@Autowired private FavoritaRepository repository;
 	     
     @GetMapping("/{id}")
-	public ResponseEntity<Receita> buscar(@PathVariable("id") Long id) {
+	public ResponseEntity<Favorita> buscar(@PathVariable("id") Long id) {
     	verifyIfProdutoExists(id);
-		Receita receita = repository.findOne(id);
-		return new ResponseEntity<Receita>(receita,HttpStatus.OK);
+		Favorita favorita = repository.findOne(id);
+		return new ResponseEntity<Favorita>(favorita,HttpStatus.OK);
 	}
     
 //    @GetMapping
-//    public ResponseEntity<List<?>> buscaReceitaPorNome(@RequestParam("nome") Optional<String> nome) {
-//    	List<?> receita = (nome.isPresent()) ? (List<?>) repository.findByNomeIgnoreCaseContaining(nome) : (List<?>) repository.findAll();
-//    	if(receita == null) {
+//    public ResponseEntity<List<?>> buscaFavoritaPorNome(@RequestParam("nome") Optional<String> nome) {
+//    	List<?> favorita = (nome.isPresent()) ? (List<?>) repository.findByNomeIgnoreCaseContaining(nome) : (List<?>) repository.findAll();
+//    	if(favorita == null) {
 //			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 //		}
-//        return new ResponseEntity<List<?>>(receita,HttpStatus.OK);
+//        return new ResponseEntity<List<?>>(favorita,HttpStatus.OK);
 //    }
     
     @GetMapping
-    public ResponseEntity<?> buscaReceita(Pageable pageable) {
+    public ResponseEntity<?> buscaFavorita(Pageable pageable) {
         return new ResponseEntity<>(repository.findAll(), HttpStatus.OK);
     }
     
     @PostMapping
-    public ResponseEntity<?> save(@Valid @RequestBody Receita receita) {
-    	return new ResponseEntity<>(repository.save(receita), HttpStatus.CREATED);
+    public ResponseEntity<?> save(@Valid @RequestBody Favorita favorita) {
+    	return new ResponseEntity<>(repository.save(favorita), HttpStatus.CREATED);
     }
     
     @PutMapping
-    public ResponseEntity<?> update(@RequestBody Receita receita) {
-    	verifyIfProdutoExists(receita.getId());
-    	return new ResponseEntity<>(repository.save(receita), HttpStatus.OK);
+    public ResponseEntity<?> update(@RequestBody Favorita favorita) {
+    	verifyIfProdutoExists(favorita.getId());
+    	return new ResponseEntity<>(repository.save(favorita), HttpStatus.OK);
     }
     
     @DeleteMapping("/{id}")
@@ -73,7 +69,7 @@ public class ReceitaController implements Serializable {
     
     private void verifyIfProdutoExists(Long id) {
     	if(repository.findOne(id) == null)
-    		throw new ResourceNotFoundException("Receita não encontrada para o ID "+id);
+    		throw new ResourceNotFoundException("Receita favorita não encontrada para o ID "+id);
     }
 	
 }

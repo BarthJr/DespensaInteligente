@@ -1,4 +1,4 @@
-package com.despensa_inteligente.controller;
+package com.despensa_inteligente.endpoints;
 
 import java.io.Serializable;
 import java.util.List;
@@ -26,7 +26,7 @@ import com.despensa_inteligente.repository.DespensaRepository;
 @SuppressWarnings("serial")
 @RestController
 @RequestMapping("/despensas")
-public class DespensaController implements Serializable {
+public class DespensaEndpoint implements Serializable {
 	
 	@Autowired private DespensaRepository repository;
 	@Autowired private ClienteRepository clienteRepository;

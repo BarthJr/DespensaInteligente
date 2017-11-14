@@ -1,9 +1,6 @@
-package com.despensa_inteligente.controller;
+package com.despensa_inteligente.endpoints;
 
 import java.io.Serializable;
-
-import javax.management.RuntimeErrorException;
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
@@ -24,7 +21,7 @@ import com.despensa_inteligente.repository.ProdutoDespensaRepository;
 @SuppressWarnings("serial")
 @RestController
 @RequestMapping("/produtosDespensas")
-public class ProdutoDespensaController implements Serializable {
+public class ProdutoDespensaEndpoint implements Serializable {
 	
 	@Autowired private ProdutoDespensaRepository repository;
 	     
@@ -59,6 +56,12 @@ public class ProdutoDespensaController implements Serializable {
     	verifyIfProdutoExists(produtoDespensa.getId());
     	return new ResponseEntity<>(repository.save(produtoDespensa), HttpStatus.OK);
     }
+
+//    @PutMapping("/fazer-receita")
+//    public ResponseEntity<?> update(@RequestBody ProdutoDespensa produtoDespensa) {
+//        verifyIfProdutoExists(produtoDespensa.getId());
+//        return new ResponseEntity<>(repository.save(produtoDespensa), HttpStatus.OK);
+//    }
     
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") Long  id) {

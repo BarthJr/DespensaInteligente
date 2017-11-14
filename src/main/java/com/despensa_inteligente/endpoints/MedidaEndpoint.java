@@ -1,8 +1,7 @@
-package com.despensa_inteligente.controller;
+package com.despensa_inteligente.endpoints;
 
 import java.io.Serializable;
 
-import javax.management.RuntimeErrorException;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,46 +18,46 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.despensa_inteligente.model.Categoria;
-import com.despensa_inteligente.repository.CategoriaRepository;
+import com.despensa_inteligente.model.Medida;
+import com.despensa_inteligente.repository.MedidaRepository;
 
 @SuppressWarnings("serial")
 @RestController
-@RequestMapping("/categorias")
-public class CategoriaController implements Serializable {
+@RequestMapping("/medidas")
+public class MedidaEndpoint implements Serializable {
 	
-	@Autowired private CategoriaRepository repository;
+	@Autowired private MedidaRepository repository;
 	     
     @GetMapping("/{id}")
-	public ResponseEntity<Categoria> buscar(@PathVariable("id") Long id) {
+	public ResponseEntity<Medida> buscar(@PathVariable("id") Long id) {
     	verifyIfProdutoExists(id);
-		Categoria categoria = repository.findOne(id);
-		return new ResponseEntity<Categoria>(categoria,HttpStatus.OK);
+		Medida medida = repository.findOne(id);
+		return new ResponseEntity<Medida>(medida,HttpStatus.OK);
 	}
     
 //    @GetMapping
-//    public ResponseEntity<List<?>> buscaCategoriaPorNome(@RequestParam("nome") Optional<String> nome) {
-//    	List<?> categoria = (nome.isPresent()) ? (List<?>) repository.findByNomeIgnoreCaseContaining(nome) : (List<?>) repository.findAll();
-//    	if(categoria == null) {
+//    public ResponseEntity<List<?>> buscaMedidaPorNome(@RequestParam("nome") Optional<String> nome) {
+//    	List<?> medida = (nome.isPresent()) ? (List<?>) repository.findByNomeIgnoreCaseContaining(nome) : (List<?>) repository.findAll();
+//    	if(medida == null) {
 //			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 //		}
-//        return new ResponseEntity<List<?>>(categoria,HttpStatus.OK);
+//        return new ResponseEntity<List<?>>(medida,HttpStatus.OK);
 //    }
     
     @GetMapping
-    public ResponseEntity<?> buscaCategoria() {
+    public ResponseEntity<?> buscaMedida(Pageable pageable) {
         return new ResponseEntity<>(repository.findAll(), HttpStatus.OK);
     }
     
     @PostMapping
-    public ResponseEntity<?> save(@Valid @RequestBody Categoria categoria) {
-    	return new ResponseEntity<>(repository.save(categoria), HttpStatus.CREATED);
+    public ResponseEntity<?> save(@Valid @RequestBody Medida medida) {
+    	return new ResponseEntity<>(repository.save(medida), HttpStatus.CREATED);
     }
     
     @PutMapping
-    public ResponseEntity<?> update(@RequestBody Categoria categoria) {
-    	verifyIfProdutoExists(categoria.getId());
-    	return new ResponseEntity<>(repository.save(categoria), HttpStatus.OK);
+    public ResponseEntity<?> update(@RequestBody Medida medida) {
+    	verifyIfProdutoExists(medida.getId());
+    	return new ResponseEntity<>(repository.save(medida), HttpStatus.OK);
     }
     
     @DeleteMapping("/{id}")
@@ -70,7 +69,7 @@ public class CategoriaController implements Serializable {
     
     private void verifyIfProdutoExists(Long id) {
     	if(repository.findOne(id) == null)
-    		throw new ResourceNotFoundException("Categoria não encontrada para o ID "+id);
+    		throw new ResourceNotFoundException("Medida não encontrada para o ID "+id);
     }
 	
 }

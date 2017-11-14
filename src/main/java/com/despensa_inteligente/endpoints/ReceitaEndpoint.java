@@ -1,8 +1,7 @@
-package com.despensa_inteligente.controller;
+package com.despensa_inteligente.endpoints;
 
 import java.io.Serializable;
 
-import javax.management.RuntimeErrorException;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,46 +18,46 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.despensa_inteligente.model.Medida;
-import com.despensa_inteligente.repository.MedidaRepository;
+import com.despensa_inteligente.model.Receita;
+import com.despensa_inteligente.repository.ReceitaRepository;
 
 @SuppressWarnings("serial")
 @RestController
-@RequestMapping("/medidas")
-public class MedidaController implements Serializable {
+@RequestMapping("/receitas")
+public class ReceitaEndpoint implements Serializable {
 	
-	@Autowired private MedidaRepository repository;
+	@Autowired private ReceitaRepository repository;
 	     
     @GetMapping("/{id}")
-	public ResponseEntity<Medida> buscar(@PathVariable("id") Long id) {
+	public ResponseEntity<Receita> buscar(@PathVariable("id") Long id) {
     	verifyIfProdutoExists(id);
-		Medida medida = repository.findOne(id);
-		return new ResponseEntity<Medida>(medida,HttpStatus.OK);
+		Receita receita = repository.findOne(id);
+		return new ResponseEntity<Receita>(receita,HttpStatus.OK);
 	}
     
 //    @GetMapping
-//    public ResponseEntity<List<?>> buscaMedidaPorNome(@RequestParam("nome") Optional<String> nome) {
-//    	List<?> medida = (nome.isPresent()) ? (List<?>) repository.findByNomeIgnoreCaseContaining(nome) : (List<?>) repository.findAll();
-//    	if(medida == null) {
+//    public ResponseEntity<List<?>> buscaReceitaPorNome(@RequestParam("nome") Optional<String> nome) {
+//    	List<?> receita = (nome.isPresent()) ? (List<?>) repository.findByNomeIgnoreCaseContaining(nome) : (List<?>) repository.findAll();
+//    	if(receita == null) {
 //			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 //		}
-//        return new ResponseEntity<List<?>>(medida,HttpStatus.OK);
+//        return new ResponseEntity<List<?>>(receita,HttpStatus.OK);
 //    }
     
     @GetMapping
-    public ResponseEntity<?> buscaMedida(Pageable pageable) {
+    public ResponseEntity<?> buscaReceita(Pageable pageable) {
         return new ResponseEntity<>(repository.findAll(), HttpStatus.OK);
     }
     
     @PostMapping
-    public ResponseEntity<?> save(@Valid @RequestBody Medida medida) {
-    	return new ResponseEntity<>(repository.save(medida), HttpStatus.CREATED);
+    public ResponseEntity<?> save(@Valid @RequestBody Receita receita) {
+    	return new ResponseEntity<>(repository.save(receita), HttpStatus.CREATED);
     }
     
     @PutMapping
-    public ResponseEntity<?> update(@RequestBody Medida medida) {
-    	verifyIfProdutoExists(medida.getId());
-    	return new ResponseEntity<>(repository.save(medida), HttpStatus.OK);
+    public ResponseEntity<?> update(@RequestBody Receita receita) {
+    	verifyIfProdutoExists(receita.getId());
+    	return new ResponseEntity<>(repository.save(receita), HttpStatus.OK);
     }
     
     @DeleteMapping("/{id}")
@@ -70,7 +69,7 @@ public class MedidaController implements Serializable {
     
     private void verifyIfProdutoExists(Long id) {
     	if(repository.findOne(id) == null)
-    		throw new ResourceNotFoundException("Medida não encontrada para o ID "+id);
+    		throw new ResourceNotFoundException("Receita não encontrada para o ID "+id);
     }
 	
 }

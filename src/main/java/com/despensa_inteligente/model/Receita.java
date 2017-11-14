@@ -2,6 +2,7 @@ package com.despensa_inteligente.model;
 
 import com.despensa_inteligente.serializers.ClienteSerializer;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -30,8 +31,7 @@ public class Receita extends AbstractModel {
 	private Cliente cliente;
 	
 	@OneToMany(mappedBy = "receita")
-//	@JsonIgnoreProperties("receita")
-	@JsonIgnore
+	@JsonIgnoreProperties("receita")
 	private List<ProdutoReceita> produtosReceitas = new ArrayList<>();
 	
 	@OneToMany(mappedBy = "receita")
