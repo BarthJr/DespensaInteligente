@@ -14,7 +14,7 @@
             <strong>Cadastro de Produtos</strong>
         </div>
         <div class="panel-body">
-            <form class="form-horizontal" th:object="${produto}" th:action="@{/save}" method="POST" style="margin: 10px">
+            <form class="form-horizontal" th:object="${produto}" th:action="@{/produto/save}" method="POST" style="margin: 10px">
                 <div class="form-group">
                     <fieldset>
                         <div class="form-group row">
@@ -44,14 +44,14 @@
                         <div class="form-group row">
                             <div class="col-md-4" th:classappend="${#fields.hasErrors('tipo')}? 'has-error'">
                                 <label>Tipo</label> 
-                                <input type="text" class="form-control input-sm" th:field="*{tipo}" maxlength="150" placeholder="Informe a tipo"/>
+                                <input type="text" class="form-control input-sm" th:field="*{tipo}" maxlength="150" placeholder="Informe o tipo"/>
                             </div>
                         </div>                        
                     </fieldset>
                 </div>
                 <div class="form-group row">
                     <button type="submit" class="btn btn-sm btn-primary">Salvar</button>
-                    <a th:href="@{produto}" class="btn btn-sm btn-default">Cancelar</a>
+                    <a class="btn btn-sm btn-default" th:href="@{/produto}">Cancelar</a>
                 </div>
             </form>
         </div>

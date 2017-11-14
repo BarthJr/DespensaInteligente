@@ -33,8 +33,8 @@
                             <td th:text="${produto.tipo}"></td>
                             <td>
                                 <div class="btn-group pull-center">
-                                    <a class="btn btn-sm btn-primary" th:href="@{/edit/{id}(id=${produto.id})}" >Editar</a>
-                                    <a class="delete btn btn-sm btn-danger" th:href="@{/delete/{id}(id=${produto.id})}">Excluir</a>
+                                    <a class="btn btn-sm btn-primary" th:href="@{/produto/edit/{id}(id=${produto.id})}" >Editar</a>
+                                    <a class="delete btn btn-sm btn-danger" th:href="@{/produto/delete/{id}(id=${produto.id})}">Excluir</a>
                                </div>
                             </td>
                         </tr>
@@ -43,7 +43,7 @@
             </div>
         </div>
         <div class="panel-footer">
-            <a class="btn btn-sm btn-success" th:href="@{add/}" >Adicionar</a>
+            <a class="btn btn-sm btn-success" th:href="@{/produto/add}" >Adicionar</a>
         </div>
     </div>
 </body>
