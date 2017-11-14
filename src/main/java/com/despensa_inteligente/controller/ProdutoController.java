@@ -1,4 +1,4 @@
-package com.despensa_inteligente.endpoints;
+package com.despensa_inteligente.controller;
 
 import com.despensa_inteligente.model.Produto;
 import com.despensa_inteligente.repository.ProdutoRepository;

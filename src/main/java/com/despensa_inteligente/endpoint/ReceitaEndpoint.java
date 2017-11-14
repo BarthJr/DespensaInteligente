@@ -1,4 +1,4 @@
-package com.despensa_inteligente.endpoints;
+package com.despensa_inteligente.endpoint;
 
 import java.io.Serializable;
 
