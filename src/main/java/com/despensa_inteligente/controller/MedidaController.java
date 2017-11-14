@@ -1,7 +1,7 @@
 package com.despensa_inteligente.controller;
 
-import com.despensa_inteligente.model.Produto;
-import com.despensa_inteligente.repository.ProdutoRepository;
+import com.despensa_inteligente.model.Medida;
+import com.despensa_inteligente.repository.MedidaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -12,25 +12,25 @@ import java.io.Serializable;
 
 @SuppressWarnings("serial")
 @RestController
-@RequestMapping("/produto")
-public class ProdutoController implements Serializable{
+@RequestMapping("/medida")
+public class MedidaController implements Serializable{
 
-    @Autowired private ProdutoRepository repository;
+    @Autowired private MedidaRepository repository;
 
     @GetMapping
     public ModelAndView findAll() {
 
-        ModelAndView mv = new ModelAndView("/produto");
-        mv.addObject("produtos", repository.findAll());
+        ModelAndView mv = new ModelAndView("/medida");
+        mv.addObject("medidas", repository.findAll());
 
         return mv;
     }
 
     @GetMapping("/add")
-    public ModelAndView add(Produto produto) {
+    public ModelAndView add(Medida medida) {
 
-        ModelAndView mv = new ModelAndView("/produtoAdd");
-        mv.addObject("produto", produto);
+        ModelAndView mv = new ModelAndView("/medidaAdd");
+        mv.addObject("medida", medida);
 
         return mv;
     }
@@ -50,13 +50,13 @@ public class ProdutoController implements Serializable{
     }
 
     @PostMapping("/save")
-    public ModelAndView save(@Valid Produto produto, BindingResult result) {
+    public ModelAndView save(@Valid Medida medida, BindingResult result) {
 
         if(result.hasErrors()) {
-            return add(produto);
+            return add(medida);
         }
 
-        repository.save(produto);
+        repository.save(medida);
 
         return findAll();
     }
